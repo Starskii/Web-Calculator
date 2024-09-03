@@ -48,6 +48,16 @@ const processNumberInput = (input) => {
         newFirstValue += input;
         firstValue = parseInt(newFirstValue);
         output = firstValue.toString();
+    } else if(secondValue === null){
+        secondValue = parseInt(input);
+        output += secondValue.toString();
+    } else {
+        let newSecondValue = secondValue.toString();
+        newSecondValue += input;
+        secondValue = parseInt(newSecondValue);
+        let outputArray = output.split(" ");
+        output = `${outputArray[0]} ${outputArray[1]} `; 
+        output += secondValue.toString();
     }
     updateOutput();
 }
