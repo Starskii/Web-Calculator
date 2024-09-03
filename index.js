@@ -1,7 +1,8 @@
-const outputLabel = document.querySelector("#output");
+const outputLabel = document.querySelector("#output-label");
 let firstValue = null;
 let secondValue = null;
 let operator = null;
+let output = "0";
 
 const add = (a, b) => {
     return a + b;
@@ -39,17 +40,39 @@ const operate = (operator, a, b) => {
 }
 
 const processNumberInput = (input) => {
-
+    if(firstValue === null){
+        firstValue = parseInt(input);
+        output = firstValue.toString();
+    } else if (operator === null){
+        let newFirstValue = firstValue.toString();
+        newFirstValue += input;
+        firstValue = parseInt(newFirstValue);
+        output = firstValue.toString();
+    }
+    updateOutput();
 }
 
 const processOperatorInput = (input) => {
-
+    if(operator === null){
+        operator = input; 
+        output += ` ${input} `;
+    }else{ 
+        output = output.replace(operator, input);
+        operator = input;
+    }
+    updateOutput();
 }
 
 const clear = () => {
     firstValue = null;
     secondValue = null;
     operator = null;
+    output = "0";
+    updateOutput();
+}
+
+const updateOutput = () => {
+    outputLabel.innerHTML = output;
 }
 
 const buttonClicked = (e) => {
@@ -59,7 +82,7 @@ const buttonClicked = (e) => {
     } else if (input === "="){
 
     } else if (input === "C"){
-
+        clear();
     }else{
         processOperatorInput(input);
     }
