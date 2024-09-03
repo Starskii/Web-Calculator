@@ -85,12 +85,24 @@ const updateOutput = () => {
     outputLabel.innerHTML = output;
 }
 
+const processExpression = () => {
+    if(operator === null)
+        return;
+    if(secondValue === null)
+        secondValue = firstValue;
+    let result = operate(operator, firstValue, secondValue);
+    clear();
+    firstValue = result;
+    output = firstValue;
+    updateOutput();
+}
+
 const buttonClicked = (e) => {
     let input = e.target.innerHTML;
     if (Number.isInteger(parseInt(input))){
         processNumberInput(input);
     } else if (input === "="){
-
+        processExpression();
     } else if (input === "C"){
         clear();
     }else{
