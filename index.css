@@ -35,6 +35,13 @@ html, body{
     margin-left: 5px;
     margin-right: 5px;
 }
+#final-row{
+    justify-content: end;
+}
+
+#zero{
+    min-width: 100px;
+}
 
 .button-row{
     display: flex;
