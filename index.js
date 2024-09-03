@@ -1,4 +1,7 @@
 const outputLabel = document.querySelector("#output");
+let firstValue = null;
+let secondValue = null;
+let operator = null;
 
 const add = (a, b) => {
     return a + b;
@@ -32,64 +35,41 @@ const operate = (operator, a, b) => {
             activeFunction = divide;
             break;
     }
-    return output = activeFunction(a, b);
+    return activeFunction(a, b);
 }
 
-const updateOutput = (outputText) => {
-    outputLabel.innerHTML = outputText;
+const processNumberInput = (input) => {
+
 }
 
-const buttonPressed = (e) => {
-    console.log(parseInt(e.target.innerHTML))
-    if(Number.isInteger(parseInt(e.target.innerHTML)))
-        processNumber(parseInt(e.target.innerHTML));
-    else{
-        processOperator(e.target.innerHTML);
-    }
-    updateOutput(`${outputValue}`)
+const processOperatorInput = (input) => {
+
 }
 
-const processNumber = (number) => {
-    if (operand === null){
-        firstValue = parseInt(firstValue.toString() + number.toString());
-        console.log(firstValue);
-    } else{
-        secondValue = parseInt(secondValue.toString() + number.toString());
-        console.log(secondValue);
-    }
-}
-
-const clearOperator = () => {
+const clear = () => {
     firstValue = null;
     secondValue = null;
-    operand = null;
-    outputValue = defaultOutputValue;
+    operator = null;
 }
 
-const processOperator = (operator) => {
-    switch(operator){
-        case "C":
-            clearOperator();
-            break;
-        case "=":
-            console.log(operate(operand, firstValue, secondValue));
-            break;
-        case ".":
-            //Handle later
-            break;
-        default:
-            operand = operator;
-            break;
+const buttonClicked = (e) => {
+    let input = e.target.innerHTML;
+    if (Number.isInteger(parseInt(input))){
+        processNumberInput(input);
+    } else if (input === "="){
+
+    } else if (input === "C"){
+
+    }else{
+        processOperatorInput(input);
+    }
+    console.log(`Clicked ${e.target.innerHTML}`);
+}
+
+const main = () => {
+    for (button of document.querySelectorAll(".input-button")){
+        button.addEventListener("click", buttonClicked);
     }
 }
-const defaultOutputValue = outputLabel.innerHTML;
-let outputValue = defaultOutputValue;
-let firstValue = 0;
-let secondValue = 0;
-let operand = null;
 
-const BUTTON_NODES = document.querySelectorAll(".input-button");
-
-for (button of BUTTON_NODES){
-    button.addEventListener("click", buttonPressed);
-}
+main();
